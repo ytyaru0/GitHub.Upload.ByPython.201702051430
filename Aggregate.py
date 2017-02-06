@@ -18,7 +18,7 @@ class Aggregate:
         print("リポジトリ総数  : {0}".format(self.data.db_repo['Repositories'].count()))
         print("リポジトリ平均数: {0} repo/日".format(self.data.db_repo['Repositories'].count() / self.__date_span))
 
-        self.__sum_code_size = self.data.db_repo.query("select SUM(Size) SumSize from Languages;")['SumSize']
+        self.__sum_code_size = self.data.db_repo.query("select SUM(Size) SumSize from Languages;").next()['SumSize']
         print("コード: {0} Byte".format(self.__sum_code_size))
         self.__show_sizes_by_languages()
 
