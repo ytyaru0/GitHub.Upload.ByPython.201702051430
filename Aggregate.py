@@ -41,15 +41,15 @@ class Aggregate:
     def __show_sizes_by_languages(self):
         # 桁あわせ：最も長い言語名を取得する
         name_length = 0
-        for res in self.db_repo.query('select * from Languages where length(Language)=(select max(length(Language)) from Languages)'):
+        for res in self.data.db_repo.query('select * from Languages where length(Language)=(select max(length(Language)) from Languages)'):
             name_length = res['Language']
 
         # 桁あわせ：最も大きい言語別合計Byteを取得する
-        size_length = self.db_repo.query('select sum(Size) SumSize from Languages group by Language order by SumSize desc').next()['SumSize']
+        size_length = self.data.db_repo.query('select sum(Size) SumSize from Languages group by Language order by SumSize desc').next()['SumSize']
 
         # 言語別の合計Byte数
         format_str = "  {0:<%d}: {1:>%d} Byte" % (len(name_length), len(str(size_length)))
-        for lang in self.db_repo.query('select Language, sum(Size) SumSize from Languages group by Language order by SumSize desc'):
+        for lang in self.data.db_repo.query('select Language, sum(Size) SumSize from Languages group by Language order by SumSize desc'):
             print(format_str.format(lang['Language'], lang['SumSize']))
 
 """
