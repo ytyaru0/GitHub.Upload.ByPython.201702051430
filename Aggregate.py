@@ -23,8 +23,8 @@ class Aggregate:
         self.__show_sizes_by_languages()
 
     def __calc_date(self):
-        first_date = self.data.query("select min(CreatedAt) FirstDate from Repositories;").next()['FirstDate']
-        last_date = self.data.query("select max(CreatedAt) LastDate from Repositories;").next()['LastDate']
+        first_date = self.data.db_repo.query("select min(CreatedAt) FirstDate from Repositories;").next()['FirstDate']
+        last_date = self.data.db_repo.query("select max(CreatedAt) LastDate from Repositories;").next()['LastDate']
         self.__first_date = datetime.strptime(first_date, self.__date_format)
         self.__last_date = datetime.strptime(last_date, self.__date_format)
         self.__date_span = (self.__last_date - self.__first_date).days
