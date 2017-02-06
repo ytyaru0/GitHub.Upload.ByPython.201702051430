@@ -12,8 +12,8 @@ class Aggregate:
 
     def Show(self):
         self.__calc_date()
-        print("開始日: {0}".format(self.__date_format.format(self.__first_date)))
-        print("最終日: {0}".format(self.__date_format.format(self.__last_date)))
+        print("開始日: {0:%Y-%m-%d}".format(self.__first_date))
+        print("最終日: {0:%Y-%m-%d}".format(self.__last_date))
         print("期  間: {0} 日間".format(self.__date_span))
         print("リポジトリ総数  : {0}".format(self.data.db_repo['Repositories'].count()))
         print("リポジトリ平均数: {0} repo/日".format(self.data.db_repo['Repositories'].count() / self.__date_span))
