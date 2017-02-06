@@ -47,7 +47,7 @@ class Command:
         header_author = "Authorization: token {0}".format(self.data.get_access_token())
         json_file = "GitHub.{0}.{1}.js".format(self.data.get_username(), self.data.get_repo_name())
         command = "curl -k -o '{0}' -H '{1}' -H '{2}' {3} -d '{4}'".format(json_file, header_timezone, header_author, url, post_data)
-        res = subprocess.check_output(shlex.split(command))
+#        res = subprocess.check_output(shlex.split(command))
         time.sleep(2)
         with open(json_file, 'r') as response:
             res = response.read()
@@ -119,7 +119,7 @@ class Command:
             return None
 
         self.data.db_repo.begin()
-        repo_id = self.data.db_repo['Repositories'].find_one(Username=self.data.get_username())['Id']
+        repo_id = self.data.db_repo['Repositories'].find_one(Name=self.data.get_repo_name())['Id']
         self.data.db_repo['Languages'].delete(RepositoryId=repo_id)
         res = json.loads(r.text)
         for key in res.keys():
