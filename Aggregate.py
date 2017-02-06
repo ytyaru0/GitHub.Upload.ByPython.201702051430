@@ -12,14 +12,14 @@ class Aggregate:
 
     def Show(self):
         self.__calc_date()
-        print("開始日: " + self.__date_format.format(self.__first_date))
-        print("最終日: " + self.__date_format.format(self.__last_date))
-        print("期  間: " + self.__date_span + " 日間")
-        print("リポジトリ総数  : " + self.data.db_repo['Repositories'].count())
-        print("リポジトリ平均数: " + self.data.db_repo['Repositories'].count() / self.__date_span + " repo/日")
+        print("開始日: {0}".format(self.__date_format.format(self.__first_date)))
+        print("最終日: {0}".format(self.__date_format.format(self.__last_date)))
+        print("期  間: {0} 日間".format(self.__date_span))
+        print("リポジトリ総数  : {0}".format(self.data.db_repo['Repositories'].count()))
+        print("リポジトリ平均数: {0} repo/日".format(self.data.db_repo['Repositories'].count() / self.__date_span))
 
         self.__sum_code_size = self.data.db_repo.query("select SUM(Size) SumSize from Languages;")['SumSize']
-        print("コード: " + self.__sum_code_size + " Byte")
+        print("コード: {0} Byte".format(self.__sum_code_size))
         self.__show_sizes_by_languages()
 
     def __calc_date(self):
